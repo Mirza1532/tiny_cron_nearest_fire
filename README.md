@@ -44,3 +44,10 @@ here rather than hidden in a comment.
 `next_fire` takes an optional `now` callable so tests can supply a fake
 clock. There is no sleeping and no wall-clock dependency in the test
 suite.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
